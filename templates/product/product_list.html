@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Product List - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title">Product List</h2>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Product ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Unit Price</th>
+                                    <th scope="col">Stock Quantity</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product in products %}
+                                    <tr>
+                                        <td>{{ product.product_id }}</td>
+                                        <td>{{ product.name }}</td>
+                                        <td>{{ product.description }}</td>
+                                        <td>${{ product.unit_price }}</td>
+                                        <td>{{ product.stock_quantity }}</td>
+                                        <td>
+                                            <a href="{% url 'edit_product' product.product_id %}" class="btn btn-sm btn-primary">Edit</a>
+                                            <a href="{% url 'delete_product' product.product_id %}" class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="{% url 'add_product' %}" class="btn btn-primary">Add Product</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

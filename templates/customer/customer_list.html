@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Customer List - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title">Customer List</h2>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Customer ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for customer in customers %}
+                                    <tr>
+                                        <td>{{ customer.customer_id }}</td>
+                                        <td>{{ customer.name }}</td>
+                                        <td>{{ customer.address }}</td>
+                                        <td>{{ customer.phone }}</td>
+                                        <td>{{ customer.email }}</td>
+                                        <td>
+                                            <a href="{% url 'edit_customer' customer.customer_id %}" class="btn btn-sm btn-primary">Edit</a>
+                                            <a href="{% url 'delete_customer' customer.customer_id %}" class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="{% url 'add_customer' %}" class="btn btn-primary">Add Customer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

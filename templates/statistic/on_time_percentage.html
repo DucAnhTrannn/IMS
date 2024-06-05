@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}On-Time Percentage - {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>On-Time Percentage</h1>
+    
+    <p>Percentage of Invoices Completed on Time: {{ on_time_percentage }}%</p>
+{% endblock %}

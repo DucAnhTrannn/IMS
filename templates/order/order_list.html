@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Order List - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title">Order List</h2>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Order ID</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Order Value</th>
+                                    <th scope="col">Customer</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                                    <tr>
+                                        <td>{{ order.order_id }}</td>
+                                        <td>{{ order.date }}</td>
+                                        <td>${{ order.order_value }}</td>
+                                        <td>{{ order.customer.name }}</td>
+                                        <td>{{ order.product.name }}</td>
+                                        <td>
+                                            <a href="{% url 'edit_order' order.order_id %}" class="btn btn-sm btn-primary">Edit</a>
+                                            <a href="{% url 'delete_order' order.order_id %}" class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="{% url 'add_order' %}" class="btn btn-primary">Add Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

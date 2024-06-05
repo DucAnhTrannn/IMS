@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment Status - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title mb-4 text-center font-weight-bold text-primary pb-2 border-bottom">Payment Status</h2>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="mb-3">Paid Invoices</h3>
+                            <ul class="list-group">
+                                {% for invoice in paid_invoices %}
+                                    <li class="list-group-item">
+                                        <strong>Invoice ID:</strong> {{ invoice.invoice_id }}<br>
+                                        <strong>Customer:</strong> {{ invoice.customer.name }}<br>
+                                        <strong>Date Paid:</strong> {{ invoice.date_payment }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h3 class="mb-3">Unpaid Invoices</h3>
+                            <ul class="list-group">
+                                {% for invoice in unpaid_invoices %}
+                                    <li class="list-group-item">
+                                        <strong>Invoice ID:</strong> {{ invoice.invoice_id }}<br>
+                                        <strong>Customer:</strong> {{ invoice.customer.name }}<br>
+                                        <strong>Due Date:</strong> {{ invoice.due_date }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="text-right">
+                        <a href="{% url 'statistics' %}" class="btn btn-secondary">Back to Statistics</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

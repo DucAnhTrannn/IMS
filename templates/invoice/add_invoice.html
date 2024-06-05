@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}Add Invoice - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title mb-4 text-center font-weight-bold text-primary pb-2 border-bottom">Add Invoice</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <button type="submit" class="btn btn-primary btn-block mt-4">Save</button>
+                    </form>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="text-right">
+                        <a href="{% url 'invoice_list' %}" class="btn btn-secondary">Back to Invoice List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

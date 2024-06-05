@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}Invoice List - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title">Invoice List</h2>
+                </div>
+                <div class="card-body">
+                    <!-- Search Form -->
+                    <div class="mb-2">
+                        <form method="get">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="start_date">Name</label>
+                                        <input type="text" name="q" class="form-control" placeholder="Enter Name or Phone Number" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="start_date">Start Date:</label>
+                                        <input type="date" id="start_date" name="start_date" class="form-control" value="{% if start_date %}{{ start_date|date:"Y-m-d" }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="end_date">End Date:</label>
+                                        <input type="date" id="end_date" name="end_date" class="form-control" value="{% if end_date %}{{ end_date|date:"Y-m-d" }}{% endif %}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary mr-2">Apply Filters & Search</button>
+                                    <a href="{% url 'invoice_list' %}" class="btn btn-secondary">Reset</a>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="my-b text-right">
+                            <a href="{% url 'export_invoices_csv' %}" class="btn btn-info">Export Invoices (CSV)</a>
+                            <a href="{% url 'export_invoices_pdf' %}" class="btn btn-info">Export Invoices (PDF)</a>
+                        </div>
+                    </div>                    
+
+                    <!-- Invoices Table -->
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Invoice ID</th>
+                                    <th scope="col">Date Payment</th>
+                                    <th scope="col">Total Payment</th>
+                                    <th scope="col">Customer Name</th>
+                                    <th scope="col">Paid</th>
+                                    <th scope="col">Customer Phone</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for invoice in invoices %}
+                                    <tr>
+                                        <td>{{ invoice.invoice_id }}</td>
+                                        <td>{{ invoice.date_payment }}</td>
+                                        <td>${{ invoice.total_payment }}</td>
+                                        <td>{{ invoice.customer.name }}</td>
+                                        <td>{% if invoice.paid %}Paid{% else %}Not Paid{% endif %}</td>
+                                        <td>{{ invoice.customer.phone }}</td>
+                                        <td>
+                                            <a href="{% url 'edit_invoice' invoice.invoice_id %}" class="btn btn-sm btn-primary">Edit</a>
+                                            <a href="{% url 'delete_invoice' invoice.invoice_id %}" class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="{% url 'add_invoice' %}" class="btn btn-primary">Add Invoice</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

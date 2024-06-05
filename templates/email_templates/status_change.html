@@ -1,0 +1,7 @@
+Dear {{ invoice.customer.name }},
+
+We would like to inform you that the status of invoice {{ invoice.invoice_id }} has changed to {% if invoice.paid %}Paid{% else %}Unpaid{% endif %}.
+
+If you have any questions or concerns, please feel free to contact us.
+
+Thank you.

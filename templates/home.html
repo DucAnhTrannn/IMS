@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home - {{ block.super }}{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4">Welcome to the Invoice Management System</h1>
+                <p class="lead">Effortlessly manage your invoices with our intuitive system. Create, edit, and track invoices seamlessly.</p>
+                <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Get Started</a> -->
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'images/invoice-management.png' %}" alt="Invoice Management" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="feature-box">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Create Invoices</h3>
+                    <p>Easily create professional invoices with our user-friendly interface.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="feature-box">
+                    <i class="fas fa-edit"></i>
+                    <h3>Edit Invoices</h3>
+                    <p>Edit and customize your invoices to match your branding and requirements.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="feature-box">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Track Payments</h3>
+                    <p>Track payments and view real-time insights with our comprehensive reporting tools.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
